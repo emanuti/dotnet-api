@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infraestructure.Data.Repositories
 {
-    public class RepositoryPessoaFisica
-        : RepositoryBase<PessoaFisica>, IRepositoryPessoaFisica
+    public class RepositoryContaCorrente 
+        : RepositoryBase<ContaCorrente>, IRepositoryContaCorrente
     {
         private SqlContext _sqlContext { get; set; }
-        
-        public RepositoryPessoaFisica(SqlContext sqlContext) 
+
+        public RepositoryContaCorrente(SqlContext sqlContext)
             : base(sqlContext)
         {
             this._sqlContext = sqlContext;

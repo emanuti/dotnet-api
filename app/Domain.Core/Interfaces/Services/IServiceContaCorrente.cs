@@ -2,7 +2,7 @@ using Domain.Entities;
 
 namespace Domain.Core.Interfaces.Services
 {
-    public interface IServiceMovimentacao : IServiceBase<Movimentacao>
+    public interface IServiceContaCorrente : IServiceBase<ContaCorrente>
     {
     }
 }

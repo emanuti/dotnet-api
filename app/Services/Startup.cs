@@ -11,8 +11,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Microsoft.EntityFrameworkCore;
 using Autofac;
 using Infraestructure.CrossCutting.IOC;
+using Infraestructure.Data;
 
 namespace Services
 {
@@ -34,6 +36,14 @@ namespace Services
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API mentoria", Version = "v1" });
             });
+
+            services.AddDbContext<SqlContext>(
+                options => options.UseLoggerFactory(
+                    LoggerFactory.Create(builder => builder.AddConsole())
+                ).UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")
+                )
+            );
         }
 
         public void ConfigureContainer(ContainerBuilder builder)

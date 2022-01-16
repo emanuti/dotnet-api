@@ -33,13 +33,6 @@ All the commands bellow will be executed in this root project folder
 #### na pasta Infraestructure
 > docker run --rm -v $(pwd):/app -w /app mcr.microsoft.com/dotnet/sdk:5.0-buster-slim dotnet add package Autofac
 
-### building application
-With this command you can generate bin folder in app folder:
-> docker run --rm -v $(pwd):/app -w /app/Services mcr.microsoft.com/dotnet/sdk:5.0-buster-slim dotnet build
-### running application
-Run this command on app folder:
-> docker run --rm -it -p 8000:80 -v $(pwd):/app/ -w /app/Services -e ASPNETCORE_URLS=http://+:80 -e ASPNETCORE_ENVIRONMENT=Development mcr.microsoft.com/dotnet/sdk:5.0-buster-slim dotnet run --no-launch-profile
-
 ## Add DB Dependencies into Infraestructure
 ### installing Microsoft.EntityFrameworkCore package
 > docker run --rm -v $(pwd):/app -w /app/Infraestructure mcr.microsoft.com/dotnet/sdk:5.0-buster-slim dotnet add package Microsoft.EntityFrameworkCore --version 5
@@ -59,6 +52,18 @@ Run this command on app folder:
 ### install SQL server extension on VS Code
 #### click on Add Connection on SQL Server extension tab
 > use localhost as hostname, sa as user, SA_PASSWORD content as password and give a name to your connection
+
+## Migrations
+### install dependencies using EntityFramework Core Tools 
+> docker run --rm -v $(pwd):/app -w /app mcr.microsoft.com/dotnet/sdk:5.0-buster-slim dotnet ef migrations add InitialCreate
+
+
+### building application
+With this command you can generate bin folder in app folder:
+> docker run --rm -v $(pwd):/app -w /app/Services mcr.microsoft.com/dotnet/sdk:5.0-buster-slim dotnet build
+### running application
+Run this command on app folder:
+> docker run --rm -it -p 8000:80 -v $(pwd):/app/ -w /app/Services -e ASPNETCORE_URLS=http://+:80 -e ASPNETCORE_ENVIRONMENT=Development mcr.microsoft.com/dotnet/sdk:5.0-buster-slim dotnet run --no-launch-profile
 
 ## Dockerfile - development
 > https://www.pluralsight.com/blog/software-development/how-to-build-custom-containers-dockercd
