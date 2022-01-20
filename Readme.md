@@ -55,6 +55,8 @@ All the commands bellow will be executed in this root project folder
 
 ## Migrations
 ### install dependencies using EntityFramework Core Tools 
+docker run --rm --env $PATH=/root/.dotnet/tools -v $(pwd):/app -w /app mcr.microsoft.com/dotnet/sdk:5.0-buster-slim dotnet tool install --global dotnet-ef && dotnet-ef migrations add InitialCreate
+
 > docker run --rm -v $(pwd):/app -w /app mcr.microsoft.com/dotnet/sdk:5.0-buster-slim dotnet ef migrations add InitialCreate
 
 
