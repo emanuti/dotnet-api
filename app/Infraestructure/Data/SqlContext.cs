@@ -16,8 +16,11 @@ namespace Infraestructure.Data
 
         public SqlContext(DbContextOptions<SqlContext> options) : base(options) {}
 
-        public DbSet<PessoaFisica> PessoasFisicas { get; set; }
         public DbSet<ContaCorrente> ContasCorrentes { get; set; }
+        public DbSet<Movimentacao> Movimentacoes { get; set; }
+        public DbSet<PessoaFisica> PessoasFisicas { get; set; }
+        public DbSet<Operacao> Operacoes { get; set; }
+
 
         public override int SaveChanges()
         {   
