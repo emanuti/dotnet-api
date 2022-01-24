@@ -45,7 +45,7 @@ namespace Services.Controllers
 
                 return Ok("Registro de pessoa cadastrado com sucesso!");
             } catch(Exception e) {
-                throw e;
+                return Problem(e.Message);
             }
         }
 
@@ -61,7 +61,7 @@ namespace Services.Controllers
 
                 return Ok("Registro de pessoa atualizado com sucesso!");
             } catch(Exception e) {
-                throw e;
+                return Problem(e.Message);
             }
         }
 
@@ -77,7 +77,7 @@ namespace Services.Controllers
 
                 return Ok("Registro de pessoa removido com sucesso!");
             } catch(Exception e) {
-                throw e;
+                return Problem(e.Message);
             }
         }
     }

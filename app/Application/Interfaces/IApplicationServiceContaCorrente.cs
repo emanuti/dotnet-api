@@ -1,4 +1,5 @@
 using Application.DTOs;
+using Domain.Entities;
 using System.Collections.Generic;
 
 namespace Application.Interfaces
@@ -14,5 +15,7 @@ namespace Application.Interfaces
         IEnumerable<ContaCorrenteDto> GetAll();
 
         ContaCorrenteDto GetById(int id);
+
+        ContaCorrente GetByAgenciaEContaCorrente(string agencia, string conta_corrente);
     }
 }

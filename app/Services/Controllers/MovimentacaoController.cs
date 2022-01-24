@@ -15,16 +15,38 @@ namespace Services.Controllers
     public class MovimentacaoController : Controller
     {
         private readonly IApplicationServiceMovimentacao _applicationServiceMovimentacao;
+        private readonly IApplicationServiceContaCorrente _applicationServiceContaCorrente;
 
-        public MovimentacaoController(IApplicationServiceMovimentacao ApplicationServiceMovimentacao)
+        public MovimentacaoController(
+            IApplicationServiceMovimentacao ApplicationServiceMovimentacao,
+            IApplicationServiceContaCorrente ApplicationServiceContaCorrente
+        )
         {
-            _applicationServiceMovimentacao = ApplicationServiceMovimentacao;
+            _applicationServiceMovimentacao  = ApplicationServiceMovimentacao;
+            _applicationServiceContaCorrente = ApplicationServiceContaCorrente;
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult<IEnumerable<string>> Get([FromBody] ExtratoDto ExtratoDto)
         {
-            return Ok(_applicationServiceMovimentacao.GetAll());
+            try {
+                var contaCorrente = _applicationServiceContaCorrente
+                    .GetByAgenciaEContaCorrente(
+                        ExtratoDto.agencia, 
+                        ExtratoDto.conta_corrente
+                    );
+
+                var movimentacoes = _applicationServiceMovimentacao
+                    .GetExtratoByIdContaDtInicioDtFim(
+                        contaCorrente.id,
+                        ExtratoDto.dt_inicio,
+                        ExtratoDto.dt_fim
+                    );
+
+                return Ok(movimentacoes);
+            } catch(Exception e) {
+                return Problem(e.Message);
+            }
         }
 
         [HttpGet("{id}")]
@@ -45,7 +67,7 @@ namespace Services.Controllers
 
                 return Ok("Registro de movimentação cadastrado com sucesso!");
             } catch(Exception e) {
-                throw e;
+                return Problem(e.Message);
             }
         }
 
@@ -61,7 +83,7 @@ namespace Services.Controllers
 
                 return Ok("Registro de movimentação atualizado com sucesso!");
             } catch(Exception e) {
-                throw e;
+                return Problem(e.Message);
             }
         }
 
@@ -77,7 +99,7 @@ namespace Services.Controllers
 
                 return Ok("Registro de movimentação removido com sucesso!");
             } catch(Exception e) {
-                throw e;
+                return Problem(e.Message);
             }
         }
     }

@@ -43,9 +43,9 @@ namespace Services.Controllers
 
                 _applicationServiceOperacao.Add(OperacaoDto);
 
-                return Ok("Registro de movimentação cadastrado com sucesso!");
+                return Ok("Registro de operação cadastrado com sucesso!");
             } catch(Exception e) {
-                throw e;
+                return Problem(e.Message);
             }
         }
 
@@ -59,9 +59,9 @@ namespace Services.Controllers
 
                 _applicationServiceOperacao.Update(OperacaoDto);
 
-                return Ok("Registro de movimentação atualizado com sucesso!");
+                return Ok("Registro de operação atualizado com sucesso!");
             } catch(Exception e) {
-                throw e;
+                return Problem(e.Message);
             }
         }
 
@@ -75,9 +75,9 @@ namespace Services.Controllers
 
                 _applicationServiceOperacao.Remove(OperacaoDto);
 
-                return Ok("Registro de movimentação removido com sucesso!");
+                return Ok("Registro de operação removido com sucesso!");
             } catch(Exception e) {
-                throw e;
+                return Problem(e.Message);
             }
         }
     }

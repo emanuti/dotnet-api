@@ -10,11 +10,11 @@ namespace Infraestructure.Data
     public class SqlContext : DbContext
     {
         public SqlContext()
-        {
+        {}
 
-        }
-
-        public SqlContext(DbContextOptions<SqlContext> options) : base(options) {}
+        public SqlContext(DbContextOptions<SqlContext> options) 
+            : base(options) 
+        {}
 
         public DbSet<ContaCorrente> ContasCorrentes { get; set; }
         public DbSet<Movimentacao> Movimentacoes { get; set; }

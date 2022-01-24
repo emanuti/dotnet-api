@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Domain.Entities;
 
 namespace Application
 {
@@ -20,7 +21,7 @@ namespace Application
         )
         {
             this._serviceContaCorrente = serviceContaCorrente;
-            this._mapperContaCorrente = mapperContaCorrente;
+            this._mapperContaCorrente  = mapperContaCorrente;
         }
 
         public void Add(ContaCorrenteDto ContaCorrenteDto) 
@@ -64,6 +65,14 @@ namespace Application
                 .MapperDtoToEntity(ContaCorrenteDto);
 
             this._serviceContaCorrente.Update(ContaCorrente);
+        }
+
+        public ContaCorrente GetByAgenciaEContaCorrente(
+            string agencia, 
+            string conta_corrente
+        ) {
+            return this._serviceContaCorrente
+                .GetByAgenciaEContaCorrente(agencia, conta_corrente);
         }
     }
 }

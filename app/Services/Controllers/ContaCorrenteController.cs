@@ -43,9 +43,9 @@ namespace Services.Controllers
 
                 _applicationServiceContaCorrente.Add(ContaCorrenteDto);
 
-                return Ok("Registro de movimentação cadastrado com sucesso!");
+                return Ok("Registro de conta corrente cadastrado com sucesso!");
             } catch(Exception e) {
-                throw e;
+                return Problem(e.Message);
             }
         }
 
@@ -59,9 +59,9 @@ namespace Services.Controllers
 
                 _applicationServiceContaCorrente.Update(ContaCorrenteDto);
 
-                return Ok("Registro de movimentação atualizado com sucesso!");
+                return Ok("Registro de conta corrente atualizado com sucesso!");
             } catch(Exception e) {
-                throw e;
+                return Problem(e.Message);
             }
         }
 
@@ -75,9 +75,9 @@ namespace Services.Controllers
 
                 _applicationServiceContaCorrente.Remove(ContaCorrenteDto);
 
-                return Ok("Registro de movimentação removido com sucesso!");
+                return Ok("Registro de conta corrente removido com sucesso!");
             } catch(Exception e) {
-                throw e;
+                return Problem(e.Message);
             }
         }
     }

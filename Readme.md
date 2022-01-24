@@ -1,4 +1,4 @@
-# Source
+# Creating DDD project .Net C# using docker on Linux
 ### Crete root project folder
 > mkdir app
 
@@ -54,19 +54,23 @@ All the commands bellow will be executed in this root project folder
 > use localhost as hostname, sa as user, SA_PASSWORD content as password and give a name to your connection
 
 ## Migrations
-### install dependencies using EntityFramework Core Tools 
-docker run --rm --env $PATH=/root/.dotnet/tools -v $(pwd):/app -w /app mcr.microsoft.com/dotnet/sdk:5.0-buster-slim dotnet tool install --global dotnet-ef && dotnet-ef migrations add InitialCreate
+### access container
+> docker run -it -v $(pwd):/app -w /app mcr.microsoft.com/dotnet/sdk:5.0-buster-slim /bin/bash
+#### install dotnet ef
+> dotnet tool install --global dotnet-ef
+destination of dotnet tool: /root/.dotnet/tools/dotnet-ef
+#### adding migrations
+> /root/.dotnet/tools/dotnet-ef migrations add InitialDB -s ../Services
 
-> docker run --rm -v $(pwd):/app -w /app mcr.microsoft.com/dotnet/sdk:5.0-buster-slim dotnet ef migrations add InitialCreate
+**-s parameter is required!** (Relative path to the project folder of the **Startup.cs** project)
 
+#### update database
+> /root/.dotnet/tools/dotnet-ef database update -s ../Services
 
+## Application
 ### building application
 With this command you can generate bin folder in app folder:
 > docker run --rm -v $(pwd):/app -w /app/Services mcr.microsoft.com/dotnet/sdk:5.0-buster-slim dotnet build
 ### running application
 Run this command on app folder:
 > docker run --rm -it -p 8000:80 -v $(pwd):/app/ -w /app/Services -e ASPNETCORE_URLS=http://+:80 -e ASPNETCORE_ENVIRONMENT=Development mcr.microsoft.com/dotnet/sdk:5.0-buster-slim dotnet run --no-launch-profile
-
-## Dockerfile - development
-> https://www.pluralsight.com/blog/software-development/how-to-build-custom-containers-dockercd
-

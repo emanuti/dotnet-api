@@ -1,11 +1,12 @@
-using Application.Interfaces;
-using Domain.Core.Interfaces.Services;
-using Application.Interfaces.Mappers;
-using Application.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Application.Interfaces;
+using Domain.Core.Interfaces.Services;
+using Application.Interfaces.Mappers;
+using Application.DTOs;
+using Domain.Entities;
 
 namespace Application
 {
@@ -64,6 +65,15 @@ namespace Application
                 .MapperDtoToEntity(movimentacaoDto);
 
             this._serviceMovimentacao.Update(movimentacao);
+        }
+
+        public List<Movimentacao> GetExtratoByIdContaDtInicioDtFim(
+            int conta_corrente_id,
+            DateTime dt_inicio, 
+            DateTime dt_fim
+        ) {
+            return this._serviceMovimentacao
+                .GetExtratoByIdContaDtInicioDtFim(conta_corrente_id, dt_inicio, dt_fim);
         }
     }
 }

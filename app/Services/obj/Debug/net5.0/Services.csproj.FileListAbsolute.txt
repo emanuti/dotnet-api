@@ -164,3 +164,5 @@
 /app/Services/bin/Debug/net5.0/Domain.Core.pdb
 /app/Services/bin/Debug/net5.0/Domain.Service.pdb
 /app/Services/bin/Debug/net5.0/Autofac.Extensions.DependencyInjection.dll
+/app/Services/bin/Debug/net5.0/Humanizer.dll
+/app/Services/bin/Debug/net5.0/Microsoft.EntityFrameworkCore.Design.dll

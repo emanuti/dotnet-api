@@ -13,5 +13,11 @@ namespace Domain.Service
         {
             this._repoContaCorrente = repo;       
         }
+
+        public ContaCorrente GetByAgenciaEContaCorrente(string agencia, string conta_corrente)
+        {
+            return _repoContaCorrente
+                .GetByAgenciaEContaCorrente(agencia, conta_corrente);
+        }
     }
 }
